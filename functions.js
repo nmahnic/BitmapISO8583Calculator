@@ -15,6 +15,16 @@ const getBitmap = (frame) => {
     return bitmap
 }
 
+const todo = (text) => {
+    removeAlert()
+    removeTable()
+    Alert(
+        `${text}:`,
+        "No ha sido implementado aún",
+        "alert alert-warning alert-dismissible"
+    )
+}
+
 const analizarBitmap = (bitmapS,bitmapPHS) => {
     
     removeAlert()
