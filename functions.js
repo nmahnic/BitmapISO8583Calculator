@@ -1,6 +1,7 @@
 const getInputValue = () => {
     let bitmap = document.getElementById("bitmap").value.trim()
 
+    console.log(fields)
     analizarBitmap(bitmap)
 }
 
