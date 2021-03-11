@@ -1,30 +1,37 @@
-const getInputValue = () => {
-    let bitmap = document.getElementById("bitmap").value.trim()
+const getInputValue = (id) => {
+    let frame = document.getElementById(id).value.trim().split(' ')
+    let framePH = document.getElementById(id).placeholder.split(' ') 
 
-    console.log(fields)
-    analizarBitmap(bitmap)
+    let bitmap = getBitmap(frame)
+    let bitmapPH = getBitmap(framePH)
+    // console.log(fields)
+    analizarBitmap(bitmap,bitmapPH)
 }
 
+const getBitmap = (frame) => {
+    console.log(frame)
+    let bitmap = frame.filter((el,i) => {if(i>8 && i<=16) return el})
+    console.log(bitmap)
+    return bitmap
+}
 
-const analizarBitmap = (bitmap) => {
+const analizarBitmap = (bitmapS,bitmapPHS) => {
     
     removeAlert()
-
-    let bitmapS = bitmap.split(' ')
-    let bitmapPHS = document.getElementById("bitmap").placeholder.split(' ')  
+    console.log(bitmapS)
+    console.log(bitmapPHS)
 
     if(bitmapS.length == 8){
         let nBitmap = bitmapS.map(element => parseInt(element,16))
-
-        showList(findFieldinBitmap(nBitmap))
-
+        
         Alert("Calculo Exitoso!","","alert alert-success alert-dismissible")
-    }else if(bitmap.length == 0){
+        showList(findFieldinBitmap(nBitmap))        
+    }else if(bitmapS.length == 0){
         let nBitmap = bitmapPHS.map(element => parseInt(element,16))
 
+        Alert("Calculo Exitoso!","No ha ingresado un bitmap, se analizo el placeHolder","alert alert-warning alert-dismissible")
         showList(findFieldinBitmap(nBitmap))
 
-        Alert("Calculo Exitoso!","No ha ingresado un bitmap, se analizo el placeHolder","alert alert-warning alert-dismissible")
     }else{
         removeTable()
         Alert("El valor ingresado no corresponde a un Bitmap ISO 8583","","alert alert-danger alert-dismissible")
