@@ -15,7 +15,7 @@ const getBitmap = (frame) => {
     return bitmap
 }
 
-const todo = (text) => {
+const toDo = (text) => {
     removeAlert()
     removeTable()
     Alert(
