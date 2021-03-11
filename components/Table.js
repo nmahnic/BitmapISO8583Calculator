@@ -14,7 +14,7 @@ const showList = (campos) => {
     let tablaCampos = document.getElementById("tablaCampos")
     let div = document.createElement("div")
     let h3 = document.createElement("h3")
-    let h3Text = document.createTextNode("Campos: ")
+    let h3Text = document.createTextNode("Bitmap: ")
     let table = document.createElement("table")
     table.className = "table table-hover table-sm table-dark"
     let tbody = document.createElement("tbody")
