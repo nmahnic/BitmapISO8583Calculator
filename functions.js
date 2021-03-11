@@ -32,7 +32,7 @@ const calcularBitmap = () => {
     
     close()
 
-    let bitmap = document.getElementById("bitmap").value
+    let bitmap = document.getElementById("bitmap").value.trim()
     let bitmapS = bitmap.split(' ')
     let bitmapPHS = document.getElementById("bitmap").placeholder.split(' ')  
 
