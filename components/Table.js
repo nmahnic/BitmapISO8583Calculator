@@ -24,17 +24,18 @@ const showList = (campos) => {
         let td1 = document.createElement("td")
         let textnode1 = document.createTextNode(`Campo: ${campos[i]}`)
         let td2 = document.createElement("td")
-        td2.className = "text-md-right"
         let bytesOfLength = fields.find(el => el.field == campos[i] ).bytesOfLength
         let dots = ""
-        for(let i = 0 ; i<bytesOfLength ; i++) dots+="."
-        let textnode2 = document.createTextNode(`${dots}${fields.find(el => el.field == campos[i] ).length}`)
+        if(bytesOfLength !=0){for(let i = 0 ; i<=bytesOfLength ; i++) dots+="."}
+        let textnode21 = document.createTextNode(`Largo: `)
+        let textnode22 = document.createTextNode(` ${dots}${fields.find(el => el.field == campos[i] ).length}`)
         let td3 = document.createElement("td")
         let textnode3 = document.createTextNode(`${fields.find(el => el.field == campos[i] ).description}`)
         
         
         td1.appendChild(textnode1)
-        td2.appendChild(textnode2)
+        td2.appendChild(textnode21)
+        td2.appendChild(textnode22)
         td3.appendChild(textnode3)
         tr.appendChild(td1)
         tr.appendChild(td2)
