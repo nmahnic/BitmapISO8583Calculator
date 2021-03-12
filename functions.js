@@ -1,4 +1,4 @@
-const getInputValue = (id,) => {
+const getInputValue = (id) => {
     let frame = document.getElementById(id).value.trim().split(' ')
     let framePH = document.getElementById(id).placeholder.split(' ') 
 
