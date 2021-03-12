@@ -1,13 +1,15 @@
-const getInputValue = (id) => {
+const getInputValue = (id,) => {
     let frame = document.getElementById(id).value.trim().split(' ')
     let framePH = document.getElementById(id).placeholder.split(' ') 
 
     let length = lengthChecker(frame)
     let lengthPH = lengthChecker(framePH)
 
-    if(length){
+
+    if(length == true){
         analizarBitmap(getBitmap(frame),true)
     }else if(!(frame.length != 1  && !length)){
+
         analizarBitmap(getBitmap(framePH),false)
     }else{
         lengthError()
@@ -35,7 +37,7 @@ const lengthChecker = (frame) => {
 }
 
 const getBitmap = (frame) => {
-    frame.filter((el,i) => {if(i>8 && i<=16) return el})
+    return frame.filter((el,i) => {if(i>8 && i<=16) return el})
 }
 
 const toDo = (text) => {
@@ -54,7 +56,7 @@ const analizarBitmap = (bitmapS,placeHolder) => {
     console.log(bitmapS)
 
     let nBitmap = bitmapS.map(element => parseInt(element,16))
-        showList(findFieldinBitmap(nBitmap))
+    showList(findFieldinBitmap(nBitmap))
 
     if(placeHolder){
         Alert("Calculo Exitoso!","","alert alert-success alert-dismissible")
