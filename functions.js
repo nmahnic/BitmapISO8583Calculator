@@ -2,17 +2,40 @@ const getInputValue = (id) => {
     let frame = document.getElementById(id).value.trim().split(' ')
     let framePH = document.getElementById(id).placeholder.split(' ') 
 
-    let bitmap = getBitmap(frame)
-    let bitmapPH = getBitmap(framePH)
-    // console.log(fields)
-    analizarBitmap(bitmap,bitmapPH)
+    let length = lengthChecker(frame)
+    let lengthPH = lengthChecker(framePH)
+
+    if(length){
+        analizarBitmap(getBitmap(frame),true)
+    }else if(!(frame.length != 1  && !length)){
+        analizarBitmap(getBitmap(framePH),false)
+    }else{
+        lengthError()
+    }   
+}
+
+const lengthError = () => {
+    removeTable()
+    removeAlert()
+    Alert(
+        "Mensaje ISO8583 invalido: ",
+        "El largo de la trama no coincide con los bytes de largo",
+        "alert alert-danger alert-dismissible"
+    )
+}
+
+const lengthChecker = (frame) => {
+    let lengthS = ""
+    const lengthArray = frame.filter((el,i) => {if(i<2) return el})
+    const length = frame.length - 2
+    lengthArray.forEach(el => {lengthS += el});
+    const nLength = parseInt(lengthS,16)
+    
+    return (length == nLength)
 }
 
 const getBitmap = (frame) => {
-    console.log(frame)
-    let bitmap = frame.filter((el,i) => {if(i>8 && i<=16) return el})
-    console.log(bitmap)
-    return bitmap
+    frame.filter((el,i) => {if(i>8 && i<=16) return el})
 }
 
 const toDo = (text) => {
@@ -25,26 +48,19 @@ const toDo = (text) => {
     )
 }
 
-const analizarBitmap = (bitmapS,bitmapPHS) => {
+const analizarBitmap = (bitmapS,placeHolder) => {
     
     removeAlert()
     console.log(bitmapS)
-    console.log(bitmapPHS)
 
-    if(bitmapS.length == 8){
-        let nBitmap = bitmapS.map(element => parseInt(element,16))
-        
-        Alert("Calculo Exitoso!","","alert alert-success alert-dismissible")
-        showList(findFieldinBitmap(nBitmap))        
-    }else if(bitmapS.length == 0){
-        let nBitmap = bitmapPHS.map(element => parseInt(element,16))
-
-        Alert("Calculo Exitoso!","No ha ingresado un bitmap, se analizo el placeHolder","alert alert-warning alert-dismissible")
+    let nBitmap = bitmapS.map(element => parseInt(element,16))
         showList(findFieldinBitmap(nBitmap))
 
+    if(placeHolder){
+        Alert("Calculo Exitoso!","","alert alert-success alert-dismissible")
+                
     }else{
-        removeTable()
-        Alert("El valor ingresado no corresponde a un Bitmap ISO 8583","","alert alert-danger alert-dismissible")
+        Alert("Calculo Exitoso!","No ha ingresado un bitmap, se analizo el placeHolder","alert alert-warning alert-dismissible")
     }
     
 }
